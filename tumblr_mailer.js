@@ -7,6 +7,16 @@ function contact(contactArray) {
 	this.emailAddress = contactArray[3];
 }
 
+function custEmail(contactArr) {
+	for(var i = 0; i < contactArr.length; i++) {
+		var custEmail = fs.readFileSync("./email_template.html","utf8");
+		custEmail = custEmail.replace("FIRST_NAME", contactArr[i].firstName);
+		custEmail = custEmail.replace("NUM_MONTHS_SINCE_CONTACT", contactArr[i].numMonthsSinceContact);
+		console.log(custEmail);
+	}
+	
+}
+
 function csvParse(nameOfFile){
 	var csvFile = fs.readFileSync(nameOfFile,"utf8");
 	//create array with each line from file as element
@@ -25,4 +35,4 @@ function csvParse(nameOfFile){
 
 }
 
-console.log(csvParse("friend_list.csv"));
+custEmail(csvParse("friend_list.csv"));
